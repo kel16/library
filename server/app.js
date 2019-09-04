@@ -22,4 +22,4 @@ app.get('*', (req, res) => {
 
 const port = 3000
 const time = new Date(Date.now()).toLocaleString()
-app.listen(port, () => console.log(`Server started on port ${port} at ${time}`))
+app.listen(process.env.PORT || port, () => console.log(`Server started at ${time}`))
