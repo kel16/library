@@ -2,13 +2,11 @@ import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchItems } from '../Modules/actions/itemActions'
-import PropTypes from 'prop-types'
-import { useStyles } from './useStyles'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Title } from './Styles'
+import { Paper, Box, Typography } from '@material-ui/core'
 
 const About = withRouter(props => {
     const location = props.location.pathname
-    const classes = useStyles()
 
     useEffect(() => {
         props.fetchItems(`/api/${location}`)
@@ -21,26 +19,21 @@ const About = withRouter(props => {
                 :
                 props.items.map(data => (
                     <Paper key={data.b_id}>
-                        <Typography variant="h4" className={classes.title}>Информация о книге "{data.title}"</Typography>
-                        <Grid className={classes.details}>
+                        <Title variant="h4">Информация о книге "{data.title}"</Title>
+                        <Box p={2} style={{ display: 'flex' }}>
                             <img src={data.picture} />
-                            <Grid className={classes.info}>
+                            <Box mx={1}>
                                 <Typography><b>Автор:</b> {data.author}</Typography>
                                 <Typography><b>Дата публикации: </b>{data.publication_date}</Typography>
                                 <Typography><b>Аннотация: </b>{data.annotation}</Typography>
-                            </Grid>
-                        </Grid>
+                            </Box>
+                        </Box>
                     </Paper>
                 ))
             }
         </>
     )
 })
-
-About.propTypes = {
-    fetchItems: PropTypes.func.isRequired,
-    items: PropTypes.array.isRequired
-}
 
 const mapStateToProps = (state) => ({
     items: state.items,

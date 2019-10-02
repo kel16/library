@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Grid, Typography, List, ListItem } from '@material-ui/core'
-import { useStyles } from './useStyles'
+import { Box, Typography, List, ListItem } from '@material-ui/core'
+import { Title } from './Styles'
 import { connect } from 'react-redux'
 import { fetchItems } from '../Modules/actions/itemActions'
-import PropTypes from 'prop-types'
 
 const Bookshelf = (props) => {
-    const classes = useStyles()
     useEffect(() => {
         props.fetchItems('/api/books')
     }, [])
 
     return (
-        <Grid>
-            <Typography variant="h3" className={classes.title}>Книжная полка</Typography>
+        <Box>
+            <Title variant="h3">Список книг</Title>
             {props.itemsAreLoading ? (
                 'Загрузка книг'
             ) : (
@@ -28,13 +26,8 @@ const Bookshelf = (props) => {
                         ))}
                     </List>
                 )}
-        </Grid>
+        </Box>
     )
-}
-
-Bookshelf.propTypes = {
-    fetchItems: PropTypes.func.isRequired,
-    items: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => ({

@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-    entry: ['babel-polyfill', './client/src/index.js'],
+    entry: ['@babel/polyfill', './client/src/index.js'],
     mode: "development",
     devtool: "source-map",
     output: {
@@ -17,18 +17,15 @@ module.exports = {
         }
     },
     module: {
-        rules: [
-            {
-                test: /\.m?js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options:
-                        {
-                            presets: ['@babel/preset-env', '@babel/preset-react']
-                        }
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-env', '@babel/preset-react']
                 }
             }
-        ]
+        }]
     }
 }

@@ -1,44 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
-  IconButton,
-  makeStyles
+  Link
 } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
+import { ReactLink } from '../Styles'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}))
-
-export default function Header() {
-  const classes = useStyles()
-
+const Header = () => {
   return (
-    <header className={classes.root}>
-      <AppBar position="static" style={{ background: '#263238' }}>
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Link to="/" style={{ textDecoration: 'none', color: '#FFF' }}>
-            <Typography variant="h6" className={classes.title}>
-              Books online
-            </Typography>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" style={{ margin: 'auto' }}>
+          <Link component={ReactLink} to="/">
+            Books online
           </Link>
-        </Toolbar>
-      </AppBar>
-    </header>
+        </Typography>
+      </Toolbar>
+    </AppBar>
   )
 }
+
+export default Header
